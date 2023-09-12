@@ -1,1 +1,21 @@
+my_which - Custom 'which' Program
+This project involves creating a custom version of the 'which' program called 'my_which.' Similar to the standard 'which,' 'my_which' will search through the PATH variable to find the directory or directories in which a target program is located.
 
+Main Functionality
+Read PATH Variable: The program reads and stores the PATH variable to search for executables.
+
+Parse Command Line Inputs: 'my_which' recognizes and separates command line flags from file names, including the '-a' flag and unknown flags.
+
+Iterate Through Directories: It iterates through directories in the PATH.
+
+Concatenate Paths: 'my_which' combines directory paths with file names and checks if the resulting path leads to an executable file.
+
+Print Results: If an executable file is found, 'my_which' prints the path and filename to the standard output.
+
+'-a' Flag Handling: If the '-a' flag is provided, 'my_which' continues searching for duplicate files in other directories.
+
+Exit Status: 'my_which' returns an appropriate exit status according to the 'which' program's specifications.
+
+Supporting Function
+int file_exists(char* path): This function determines whether a file exists and is executable, helping 'my_which' in its search.
+By following this project's structure, you can understand how 'my_which' locates executable files in the PATH and mimics the behavior of the standard 'which' program.
