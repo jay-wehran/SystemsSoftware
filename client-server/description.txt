@@ -1,1 +1,27 @@
+In this project, I've implemented the server half of a client/server pair that communicates over Unix sockets. The server program is responsible for receiving files from clients, storing them, and responding to requests for those files. Below are the key tasks and features of the server:
 
+Flag Parsing: The server accepts a --hostname flag to specify the IP address and port for binding the socket. If not provided, it uses the default localhost:8081.
+
+HashMap Implementation: The server creates a custom hash map data structure to store received files in memory. This hash map uses filenames as keys and the file data as values. It provides two methods:
+
+bool insert(String key, File value): Inserts a key-value pair into the hash map. Returns true if the key already existed (replaces the stored value), and false if the key didn't exist previously.
+
+File get(String key): Returns the file associated with the supplied key. Throws an exception if the key doesn't exist.
+
+Message Processing: The server enters an infinite loop after binding to the specified socket. When a client connects, it follows these steps for incoming messages:
+
+Receive Message: Reads the message into a buffer.
+
+Decrypt Message: Decrypts the message using a simple XOR encryption scheme with a key of 42.
+
+Deserialize Message: Deserializes the message into the appropriate struct, either a File or a Request.
+
+Handling Files: If the message is a File, the server inserts the filename and file data into the hash map. If it's a Request, the server checks if the requested file exists in the hash map.
+
+If the requested file doesn't exist, nothing is sent back to the client.
+If the file exists, it is serialized into a File message, encrypted, and sent to the client.
+Server Continuity: The server continues running and waiting for new messages until the user manually terminates the program or the client terminates the connection.
+
+Message Protocol: The assignment defines a message protocol for serializing and deserializing files and requests. The format includes tags and data structures to facilitate communication between the server and clients.
+
+Overall, the server handles communication with clients, receives and stores files, and responds to file requests using a custom hash map and message protocol.
